@@ -163,6 +163,46 @@ button, .button {
 }
 .answer { font-size: 18px; white-space: pre-wrap; border-left: 6px solid var(--brand); }
 .note { color: var(--muted); font-size: 14px; }
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr):
+  gap: 16px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.support-card {
+  display: block;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  bordeer: 2px solid #e5e7eb;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-color: var(--brand);
+}
+
+.support-icon {
+  font-size: 30px;}
+  .support-card h3 {
+    margin-bottom: 8px;
+  }
+
+  .support-card p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+.support-grid {
+grid-template-columns: 1fr;
+}
 """
 
 # The landing page: what the app is, who it is for, and one button to start. Make every line yours.
@@ -191,6 +231,23 @@ LANDING_PAGE = """<!doctype html>
         <div class="step"><strong>3. Read</strong><br>An answer that uses only your files.</div>
       </div>
       <a class="button" href="/start">Start</a>
+
+      <a class="support-card" href="/start">
+      <h3>Computer problems</h3>
+      <p>Slow computers, software errors, and system issues.</p>
+      </a>
+
+      <a class="support-card" href="/start">
+      <span class="support-icon">📧</span>
+      <h3>Account Support</h3>
+      <p>Login problems, passwords, and account access.</p>
+      </a>
+
+      <a class="support-card" href="/start">
+      <span class="support-icon">🖨️</span>
+      <h3>Printer Support</h3>
+      <p>SPrinter connections, errors, and printing problems.</p>
+      </a>
     </div>
     <p class="note">Use fictional or public files only.</p>
   </body>
