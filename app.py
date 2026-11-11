@@ -258,7 +258,11 @@ LANDING_PAGE = """<!doctype html>
     <style>""" + STYLE + """</style>
   </head>
   <body>
-    <nav class="nav"><a href="/">Home</a> <a href="/about">About</a> <a href="/start">Ask a question</a></nav>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/start">Ask a question</a>
+    </nav>
     <header class="header landing-header">
       <div class = "hero-content">
         <span class= "hero-label">AI HELPDESK ASSISTANT</span>
@@ -318,7 +322,11 @@ INDEX_PAGE = """<!doctype html>
     <style>""" + STYLE + """</style>
   </head>
   <body>
-    <nav class="nav"><a href="/">Home</a><a href="/start">Ask a question</a></nav>
+    <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/start">Ask a question</a>
+    </nav>
     <header class="header">
       <h1>Ask a Question</h1>
       <p>Upload one or more files and ask one question about them.</p>
@@ -345,7 +353,11 @@ RESULT_PAGE = """<!doctype html>
     <style>""" + STYLE + """</style>
   </head>
   <body>
-    <nav class="nav"><a href="/">Home</a><a href="/start">Ask a question</a></nav>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/start">Ask a question</a>
+    </nav>
     <header class="header">
       <h1>Answer</h1>
       <p><strong>Files:</strong> {{ files|join(", ") }} &middot; <strong>Question:</strong> {{ prompt }}</p>
@@ -364,7 +376,11 @@ ABOUT_PAGE = """<!doctype html>
 
   </head>
   <body>
-    <nav class="nav"><a href="/">Home</a><a href="/start">Ask a question</a><a href="/about">About</a></nav>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/start">Ask a question</a>
+    </nav>
     <header class="header">
       <h1>About Helpdesk AI</h1>
       <p>Learn more about the purpose of this application.</p>
