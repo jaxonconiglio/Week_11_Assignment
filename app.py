@@ -271,7 +271,7 @@ LANDING_PAGE = """<!doctype html>
     </a>
     </div>
     </header>
-    <img class="hero" src="/webappbackground.jpg" alt="Helpdesk support image">
+    <img class="hero" src="/webappbackground.png" alt="Helpdesk support image">
     <div class="card">
       <h2>Common Support Topics</h2>
       <p>Here are some common support topics for you to get started.</p>
