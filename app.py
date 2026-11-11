@@ -75,6 +75,10 @@ def home():
 def start():
     return render_template_string(INDEX_PAGE)              # the form (it was at / in Week 10)
 
+@app.route("/about")
+def about():
+    return render_template_string(ABOUT_PAGE)
+
 
 @app.route("/health")
 def health():
@@ -102,10 +106,12 @@ def ask():
 STYLE = """
 /* Make it yours: change these values first. */
 :root {
-  --brand: #e00122;      /* your project's color: header, buttons, links */
-  --page: #f4f5f7;       /* the page background */
-  --text: #1f2933;       /* normal text */
-  --muted: #6b7280;      /* small, less important text */
+--brand: #2563eb;      /* your project's color: header, button, score labels */
+  --brand-dark: 1d4ed8;  /* a darker version of the brand color */
+  --page: #f4f7fc;       /* the page background */
+  --text: #1f2937;       /* normal text */
+  --muted: #64748b;      /* small, less important text */
+  --border: #dbe3ef;     /* card borders */
 }
 
 /* One readable column in the middle of the page */
@@ -133,6 +139,34 @@ body {
 }
 .header h1 { margin: 0 0 4px; }
 .header p { margin: 0; }
+
+.landing-header p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #eff6ff;
+  margin-bottom: 20px;
+}
+
+.hero-button {
+background: white;
+color: #1d4ed8;
+padding: 12px 24px;
+border-radius: 8px;
+}
+
+.hero-button:hover {
+  background #eff6ff;
+}
+
+.hero {
+display: block;
+width: 100%;
+max-height: 300px;
+max-width: 500px;
+object-fit: contain;
+border-radius: 12px;
+margin: 0 auto 24px;
+}
 
 /* The picture on the landing page */
 .hero { width: 100%; border-radius: 12px; margin-bottom: 24px; display: block; }
@@ -165,33 +199,34 @@ button, .button {
 .note { color: var(--muted); font-size: 14px; }
 .support-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr):
+  grid-template-columns: repeat(3,1fr);
   gap: 16px;
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin: 24px 0;
 }
 
 .support-card {
   display: block;
   background: white;
   padding: 20px;
+  border: 1px solid var(--border);
   border-radius: 12px;
   text-decoration: none;
   color: var(--text);
-  bordeer: 2px solid #e5e7eb;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .support-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
   border-color: var(--brand);
 }
 
 .support-icon {
-  font-size: 30px;}
+  font-size: 30px;
+  }
+
   .support-card h3 {
-    margin-bottom: 8px;
+    margin-bottom:12px 0 8px;
   }
 
   .support-card p {
@@ -202,6 +237,14 @@ button, .button {
 @media (max-width: 600px) {
 .support-grid {
 grid-template-columns: 1fr;
+}
+
+.landing-header {
+padding: 32px 24px;
+}
+
+.landing-header h1 {
+font-size: 28px;
 }
 """
 
@@ -215,25 +258,35 @@ LANDING_PAGE = """<!doctype html>
     <style>""" + STYLE + """</style>
   </head>
   <body>
-    <nav class="nav"><a href="/">Home</a><a href="/start">Ask a question</a></nav>
-    <header class="header">
-      <h1>Helpdesk AI</h1>
-      <p>This AI tool allows you to upload your files so that we can better assist and resolve your ticket without long wait times.</p>
+    <nav class="nav"><a href="/">Home</a> <a href="/about">About</a> <a href="/start">Ask a question</a></nav>
+    <header class="header landing-header">
+      <div class = "hero-content">
+        <span class= "hero-label">AI HELPDESK ASSISTANT</span>
+      
+      <h1>Technical Support made easy.</h1>
+      <p>Welcome to Helpdesk AI! Please upload your support documentation, ask a question, and receive an AI-generated answer based on the information provided in your files.</p>
+      
+    <a class="button hero-button" href="/start"/a>
+      Get Started
+    </a>
+    </div>
     </header>
-    <img class="helpdesk" src="/helpdesk.png" alt="Helpdesk support image">
+    <img class="hero" src="/webappbackground.jpg" alt="Helpdesk support image">
     <div class="card">
-      <h2>Who it is for</h2>
-      <p>This tool is for anyone who is having a problem and wants quick assistance rather than reaching out to a human agent with a longer wait time.</p>
+      <h2>Common Support Topics</h2>
+      <p>Here are some common support topics for you to get started.</p>
       <h2>How it works</h2>
       <div class="steps">
         <div class="step"><strong>1. Upload</strong><br>One or more files: PDF, Word, or text.</div>
         <div class="step"><strong>2. Ask</strong><br>One question, in plain words.</div>
         <div class="step"><strong>3. Read</strong><br>An answer that uses only your files.</div>
       </div>
-      <a class="button" href="/start">Start</a>
+
+      <div class="support-grid">
 
       <a class="support-card" href="/start">
-      <h3>Computer problems</h3>
+      <span class="support-icon">💻</span>
+      <h3>Computer Problems</h3>
       <p>Slow computers, software errors, and system issues.</p>
       </a>
 
@@ -248,6 +301,8 @@ LANDING_PAGE = """<!doctype html>
       <h3>Printer Support</h3>
       <p>SPrinter connections, errors, and printing problems.</p>
       </a>
+
+      </div>
     </div>
     <p class="note">Use fictional or public files only.</p>
   </body>
@@ -299,7 +354,45 @@ RESULT_PAGE = """<!doctype html>
     <a class="button" href="/start">Ask another question</a>
   </body>
 </html>"""
+ABOUT_PAGE = """<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Helpdesk AI</title>
+    <style>""" + STYLE + """</style>
 
+  </head>
+  <body>
+    <nav class="nav"><a href="/">Home</a><a href="/start">Ask a question</a><a href="/about">About</a></nav>
+    <header class="header">
+      <h1>About Helpdesk AI</h1>
+      <p>Learn more about the purpose of this application.</p>
+    </header>
+    <div class="card">
+      <h2>What is Helpdesk AI?</h2>
+      <p>Helpdesk AI is a student-developed application designed to help users find information in uploaded support documents. It utilizes AI technology to provide answers based on the content of the files.</p>
+    
+    
+      <h2>How it works</h2>
+      <p>Users can upload support documents and ask questions and receive an AI-generated response based on the content of the uploaded documents.</p>
+    
+
+      <h2>Important Limitations</h2>
+      <p>Helpdesk AI is a prototype and may not always provide accurate or complete answers. Users should verify the information provided by the AI and consult official support channels when necessary.</p>
+    
+    </div>
+
+    <div class="card">
+      <h2>Supported File Formats</h2>
+      <ul>
+        <li>PDF (.pdf)</li>
+        <li>Microsoft Word (.docx)</li>
+        <li>Text files (.txt, .csv, .md)</li>
+      </ul>
+    </div>
+  </body>
+</html>"""
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)   # 5001, not 5000: on a Mac, AirPlay already uses 5000
